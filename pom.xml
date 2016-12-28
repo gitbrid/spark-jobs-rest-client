@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.ywilkof</groupId>
-    <artifactId>spark-jobs-rest-client</artifactId>
+    <artifactId>spark-jobs-rest-client-feature</artifactId>
     <version>1.3.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
