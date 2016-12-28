@@ -7,4 +7,5 @@ public interface RequestOptionsSpecification {
     JobSubmitRequestSpecification prepareJobSubmit();
     KillJobRequestSpecification killJob();
     JobStatusRequestSpecification checkJobStatus();
+    JobStatusRequestSpecification fetchJobMessage();
 }

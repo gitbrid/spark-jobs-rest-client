@@ -61,6 +61,11 @@ public class SparkRestClient implements RequestOptionsSpecification {
     public JobStatusRequestSpecification checkJobStatus() {
         return new JobStatusRequestSpecificationImpl(this);
     }
+    
+    @Override
+    public JobStatusRequestSpecification fetchJobMessage() {
+        return new JobStatusRequestSpecificationImpl(this);
+    }
 
     public static class SparkRestClientBuilder {
         private String sparkVersion;
