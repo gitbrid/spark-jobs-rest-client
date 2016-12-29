@@ -41,12 +41,11 @@ public class JobStatusRequestSpecificationImpl implements JobStatusRequestSpecif
 		DriverMessage driverMessage = new DriverMessage();
 		String string = this.jobStatusResponse.getMessage().replaceAll("\n\\s+|\"", "").replaceAll("\\s+\\{", ".")
 				.replaceAll(":\\s+", ":").replaceAll("\\}\n", "");
-//		System.out.println(this.jobStatusResponse.getMessage().replaceAll("\n\\s+|\"", "")
-//				.replaceAll("\\s+\\{", ".").replaceAll(":\\s+", ":").replaceAll("\\}\n", ""));
 		String[] msg = string.split("\n");
 		for (String str : msg) {
 			this.getMessageValue(driverMessage, str);
 		}
+		driverMessage.setState(this.jobStatusResponse.getDriverState());
 		return driverMessage;
 	}
 
@@ -82,7 +81,7 @@ public class JobStatusRequestSpecificationImpl implements JobStatusRequestSpecif
 		}
 		startWith = "state:";
 		if (str.startsWith(startWith)) {
-			driverMessage.setState(DriverMessageState.valueOf(str.replace(startWith, "")));
+			driverMessage.setMessageState(DriverMessageState.valueOf(str.replace(startWith, "")));
 		}
 	}
 
