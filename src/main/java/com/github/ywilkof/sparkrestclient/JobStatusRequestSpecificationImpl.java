@@ -41,6 +41,8 @@ public class JobStatusRequestSpecificationImpl implements JobStatusRequestSpecif
 		DriverMessage driverMessage = new DriverMessage();
 		String string = this.jobStatusResponse.getMessage().replaceAll("\n\\s+|\"", "").replaceAll("\\s+\\{", ".")
 				.replaceAll(":\\s+", ":").replaceAll("\\}\n", "");
+//		System.out.println(this.jobStatusResponse.getMessage().replaceAll("\n\\s+|\"", "")
+//				.replaceAll("\\s+\\{", ".").replaceAll(":\\s+", ":").replaceAll("\\}\n", ""));
 		String[] msg = string.split("\n");
 		for (String str : msg) {
 			this.getMessageValue(driverMessage, str);
@@ -66,17 +68,21 @@ public class JobStatusRequestSpecificationImpl implements JobStatusRequestSpecif
 	 */
 	public void getMessageValue(DriverMessage driverMessage, String str) {
 		String[] value = str.split(":");
-		if (str.startsWith("executor_id.value:")) {
-			driverMessage.setExecutor_id(value[1]);
+		String startWith="executor_id.value:";
+		if (str.startsWith(startWith)) {
+			driverMessage.setExecutor_id(str.replace(startWith, ""));
 		}
+		startWith = "slave_id.value:";
 		if (str.startsWith("slave_id.value:")) {
-			driverMessage.setSlave_id(value[1]);
+			driverMessage.setSlave_id(str.replace(startWith, ""));
 		}
-		if (str.startsWith("message:")) {
-			driverMessage.setMessage(value[1]);
+		startWith = "message:";
+		if (str.startsWith(startWith)) {
+			driverMessage.setMessage(str.replace(startWith, ""));
 		}
-		if (str.startsWith("state:")) {
-			driverMessage.setState(DriverMessageState.valueOf(value[1]));
+		startWith = "state:";
+		if (str.startsWith(startWith)) {
+			driverMessage.setState(DriverMessageState.valueOf(str.replace(startWith, "")));
 		}
 	}
 
